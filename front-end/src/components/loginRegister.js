@@ -8,6 +8,7 @@ import {axiosWithAuth} from "../utils/axiosWithAuth";
 import { loginAction } from "../store/actions/loginAction";
 import { registerAction } from "../store/actions/registerAction"
 import axios from "axios"
+import Rstyles from "./styles/styles";
 
 const initialState = {
     first_name: "",
@@ -66,11 +67,11 @@ const initialState = {
     };
   
     return (
-      <>
+      <Rstyles>
         {props.isFetching && (
           <Loader type="Grid" color="#F0C9CA" height={80} width={80} />
         )}
-        <h3 className='loginH3'> Login or Register</h3>
+        <h3> Login or Register</h3>
         <form>
         <input
             label="first_name"
@@ -120,7 +121,7 @@ const initialState = {
           <button onClick={userLogin}>Login</button>
           <button onClick={userRegister}>Register</button>
         </form>
-      </>
+      </Rstyles>
     );
   };
   

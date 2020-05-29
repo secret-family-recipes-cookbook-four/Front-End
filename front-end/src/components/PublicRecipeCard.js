@@ -1,9 +1,9 @@
 import React from 'react';
-import rstyles from "./styles/styles"
+import Rstyles from "./styles/styles"
 
 export default function RecipeCard ({cardInfo}) {
     return (
-    <rstyles>
+    <Rstyles>
         <h2>{cardInfo.title}</h2>
         <div className="ingredientsWrap">
             <h5>Ingredients:</h5>
@@ -17,6 +17,6 @@ export default function RecipeCard ({cardInfo}) {
             <h5>Intructions:</h5>
             <p>{cardInfo.intructions}</p>
         </div>
-    </rstyles>
+    </Rstyles>
     )
 } 
