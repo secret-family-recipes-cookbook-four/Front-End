@@ -46,6 +46,19 @@ const Rstyles = styled.div`
     
     }
 
+    .lrform{
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        
+        .lrinput{
+            margin: 5%;
+            padding: 5%;
+        }
+
+    }
+
     h4{
         font-size: 2.5rem;
         font-family: 'Montserrat', sans-serif;
