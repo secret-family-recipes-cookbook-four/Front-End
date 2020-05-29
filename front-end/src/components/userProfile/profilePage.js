@@ -3,6 +3,7 @@ import {getRecipes} from "../../store/actions/recipeAction"
 import ProfileCard from "./profileCard"
 import {connect} from "react-redux"
 import {useHistory} from "react-router-dom"
+import rstyles from "../styles/styles"
 
 function ProfilePage (props) {
     const { push } = useHistory()
@@ -22,7 +23,7 @@ function ProfilePage (props) {
     }, [dependants])
 
     return (
-        <div className="profilePage">
+        <rstyles>
             <div classname="profileInfo">
                 <button onClick={newRecipe}>Add a New Recipe</button>
             </div>
@@ -30,7 +31,7 @@ function ProfilePage (props) {
             ? props.recipes.map((item) => (
                 <ProfileCard key={item.id} recipe={item} />
             )) : null}
-        </div>
+        </rstyles>
     )
 }
 

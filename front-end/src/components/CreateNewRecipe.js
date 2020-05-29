@@ -1,6 +1,7 @@
 import React, {useState} from "react"
 import {useHistory} from "react-router-dom"
 import {axiosWithAuth} from "../utils/axiosWithAuth"
+import rstyles from "./styles/styles"
 
 export default function CreateRecipe (props) {
     const user_id = localStorage.getItem('user_id')
@@ -34,7 +35,7 @@ export default function CreateRecipe (props) {
     }
 
     return (
-        <div className="recipeForm">
+        <rstyles>
             <form onSubmit={addRecipe} className="addRecipe">
                 <h3>Add A New Recipe!</h3>
                 <label htmlFor="title">
@@ -75,7 +76,7 @@ export default function CreateRecipe (props) {
                 </label>
                 <button>Submit</button>
             </form>
-        </div>
+        </rstyles>
     )
 
 
