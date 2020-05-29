@@ -4,97 +4,131 @@ import Loader from "react-loader-spinner";
 import styled from 'styled-components';
 import {useHistory, withRouter} from "react-router-dom";
 
-import {axioswithAuth} from "../utils/axiosWithAuth";
-import {loginAction, registerAction} from "../store/actions";
+import {axiosWithAuth} from "../utils/axiosWithAuth";
+import { loginAction } from "../store/actions/loginAction";
+import { registerAction } from "../store/actions/registerAction"
+import axios from "axios"
 
 const initialState = {
+    first_name: "",
+    last_name: "",
+    email: "",
     username: "",
     password: "",
-};
-
-const Login = (props) => {
-    const { push } = useHistory()
-    const [login, setLogin] = useState(initialState)
-
+  };
+  
+  const Login = (props) => {
+    const { push } = useHistory();
+    const [login, setLogin] = useState(initialState);
+  
     const handleChange = (e) => {
-        e.preventDefault()
-        setLogin({
-            ...login,
-            [e.target.name]: e.target.value,
+      e.preventDefault();
+      setLogin({
+        ...login,
+        [e.target.name]: e.target.value,
+      });
+    };
+  
+    const userLogin = (e) => {
+      e.preventDefault();
+      axios
+        .post("https://secretfamilyrecipes-backend.herokuapp.com/api/auth/login", login)
+        .then((res) => {
+            console.log(res)
+          localStorage.setItem("token", JSON.stringify(res.data.token));
+          localStorage.setItem("user_id", JSON.stringify(res.data.id));
+          console.log({ res });
+          props.loginAction(res);
+          push("/recipes");
         })
-    }
-
-const userLogin = (e) => {
-    e.preventDefault()
-    axioswithAuth()
-    .post("/login", login)
-    .then((res) => {
-        localStorage.setItem("token", JSON.stringify(res.data.token))
-        localStorage.setItem("userID", res.data.user.id)
-        props.loginAction(res)
-        push("/main")
-    })
-    .catch((err) => {
-        console.log(err)
-        alert("Please enter a valid username and password, or click the register button")
-    })
-}
-
-const userRegister = (e) => {
-    e.preventDefault()
-    axioswithAuth()
-    .post("/register", login)
-    .then((res) => {
-        localStorage.setItem("token", JSON.stringify(res.data.token))
-        localStorage.setItem("userID", res.data.user.id)
-        props.registerAction(res)
-        push("/userProfile")
-    })
-    .catch((err) => {
-        console.log(err)
-        alert("There was an error registering, Please try again.")
-    })
-}
-return (
-    <>
-    {props.isFetching && (
-        <Loader type="Grid" color="#F2D5DB" height={70} width={70} /> 
-    )}
-    <h3 className="loginHeader">Login or Register!</h3>
-    <form>
+        .catch((err) => {
+          console.dir(err);
+          alert("Please enter a valid username and password, or register a new account.")
+        });
+    };
+    const userRegister = (e) => {
+      e.preventDefault();
+  
+      axios
+        .post("https://secretfamilyrecipes-backend.herokuapp.com/api/auth/register", login)
+        .then((res) => {
+            console.log(res)
+          localStorage.setItem("token", JSON.stringify(res.data.token));
+          localStorage.setItem("user_id", JSON.stringify(res.data.id));
+          console.log({ res });
+          props.registerAction(res);
+        })
+        .catch((err) => {
+          console.dir(err);
+          alert("There was an error. Please try again.")
+          // console.log({err})
+        });
+    };
+  
+    return (
+      <>
+        {props.isFetching && (
+          <Loader type="Grid" color="#F0C9CA" height={80} width={80} />
+        )}
+        <h3 className='loginH3'> Login or Register</h3>
+        <form>
         <input
-        label = "Username"
-        type = "text"
-        name = "username"
-        placeholder = "username"
-        value = {login.username}
-        onChange={handleChange} 
-        />
-        <br />
+            label="first_name"
+            type="text"
+            name="first_name"
+            placeholder="First Name"
+            value={login.first_name}
+            onChange={handleChange}
+          />
+          <br />
         <input
-        label = "Password"
-        type = "password"
-        name = "password"
-        placeholder = "password"
-        value = {login.password}
-        onChange = {handleChange} 
-        />
-        <button onClick={userLogin}>Login!</button>
-        <button onClick={userRegister}>Register!</button> 
-    </form>
-    </>
-)
-}
-
-const mapStateToProps = (state) => {
-    console.log(state.user)
-    return {
-        username: state.user.username,
-        isFetching: state.user.isFetching,
-        error:state.user.error,
-    }
-}
-
-export default withRouter(
-    connect(mapStatetoProps, {loginAction, registerAction}) (Login)
-)
+            label="last_name"
+            type="text"
+            name="last_name"
+            placeholder="Last Name"
+            value={login.last_name}
+            onChange={handleChange}
+          />
+          <br />
+        <input
+            label="email"
+            type="text"
+            name="email"
+            placeholder="Email"
+            value={login.email}
+            onChange={handleChange}
+          />
+          <br />
+          <input
+            label="username"
+            type="text"
+            name="username"
+            placeholder="Username"
+            value={login.username}
+            onChange={handleChange}
+          />
+          <br />
+          <input
+            label="password"
+            type="password"
+            name="password"
+            placeholder="Password"
+            value={login.password}
+            onChange={handleChange}
+          />
+  
+          <button onClick={userLogin}>Login</button>
+          <button onClick={userRegister}>Register</button>
+        </form>
+      </>
+    );
+  };
+  
+  const mapStateToProps = (state) => {
+    console.log(state.user);
+    return {};
+  };
+  
+  export default withRouter(
+    connect(mapStateToProps, { loginAction, registerAction })(Login)
+  );
