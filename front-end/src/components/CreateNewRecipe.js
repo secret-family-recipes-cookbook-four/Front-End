@@ -3,9 +3,9 @@ import {useHistory} from "react-router-dom"
 import {axiosWithAuth} from "../utils/axiosWithAuth"
 
 export default function CreateRecipe (props) {
-    const userID = localStorage.getItem('userID')
+    const user_id = localStorage.getItem('user_id')
     const [form, setForm] = useState({
-        user_id: userID,
+        user_id: user_id,
         title: "",
         ingredients: "",
         category: "",

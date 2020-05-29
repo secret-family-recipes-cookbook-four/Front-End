@@ -2,15 +2,16 @@ import React , {useEffect, useState} from 'react'
 import {connect} from 'react-redux'
 import axios from 'axios'
 import PublicRecipeCard from './PublicRecipeCard'
+import { axiosWithAuth } from '../utils/axiosWithAuth'
 
 function PublicRecipes (props) {
     const [recipes, setRecipes] = useState()
     useEffect (() => {
-        axios
+        axiosWithAuth()
         .get(`https://secretfamilyrecipes-backend.herokuapp.com/api/recipes`)
         .then((res) => {
             console.log({res})
-            setRecipes(res.data.recipes)
+            setRecipes(res.data)
         })
         .catch((err) => console.log({err}))
     },[])
