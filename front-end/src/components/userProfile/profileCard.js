@@ -26,7 +26,7 @@ function ProfileCard(props) {
                 <h4>Instructions:</h4>
                 <p>{props.recipe.instructions}</p>
             </div>
-            <button onCLick={deleteRecipe}>Delete</button>
+            <button onClick={deleteRecipe}>Delete</button>
         </div>
     )
 }

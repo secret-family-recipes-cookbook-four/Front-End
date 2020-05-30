@@ -9,27 +9,21 @@ function ProfilePage (props) {
     const [state, setState] = useState(props.recipes)
     const [dependants, setDependants] = useState([])
 
-    const newRecipe = e => {
-        push('/newrecipe')
-    }
-
     const reload = () => {
         window.location.reload()
     }
 
+
     useEffect(() => {
         props.getRecipes()
     }, [dependants])
-
+console.log(props.recipes)
     return (
         <div className="profilePage">
-            <div classname="profileInfo">
-                <button onClick={newRecipe}>Add a New Recipe</button>
-            </div>
-            {props.recipes 
-            ? props.recipes.map((item) => (
-                <ProfileCard key={item.id} recipe={item} />
-            )) : null}
+            <nav>
+                <button onClick={() => push("/recipes") }>Home Page</button>
+            </nav>
+                <ProfileCard recipe={props.recipes} />
         </div>
     )
 }
