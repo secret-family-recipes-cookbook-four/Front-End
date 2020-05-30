@@ -3,6 +3,7 @@ import {getRecipes} from "../../store/actions/recipeAction"
 import ProfileCard from "./profileCard"
 import {connect} from "react-redux"
 import {useHistory} from "react-router-dom"
+import Rstyles from "../styles/styles"
 
 function ProfilePage (props) {
     const { push } = useHistory()
@@ -19,12 +20,14 @@ function ProfilePage (props) {
     }, [dependants])
 console.log(props.recipes)
     return (
-        <div className="profilePage">
+        <Rstyles>
+            <div className="profilePage">
             <nav>
                 <button onClick={() => push("/recipes") }>Home Page</button>
             </nav>
                 <ProfileCard recipe={props.recipes} />
         </div>
+        </Rstyles>
     )
 }
 

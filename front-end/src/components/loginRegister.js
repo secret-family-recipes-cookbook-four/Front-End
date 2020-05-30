@@ -8,6 +8,7 @@ import {axiosWithAuth} from "../utils/axiosWithAuth";
 import { loginAction } from "../store/actions/loginAction";
 import { registerAction } from "../store/actions/registerAction"
 import axios from "axios"
+import Rstyles from "./styles/styles";
 
 const initialState = {
     first_name: "",
@@ -66,13 +67,13 @@ const initialState = {
     };
   
     return (
-      <>
+      <Rstyles>
         {props.isFetching && (
           <Loader type="Grid" color="#F0C9CA" height={80} width={80} />
         )}
-        <h3 className='loginH3'> Login or Register</h3>
-        <form>
-        <input
+        <h3> Login or Register</h3>
+        <form className='lrform'>
+        <input className= 'lrinput'
             label="first_name"
             type="text"
             name="first_name"
@@ -80,8 +81,8 @@ const initialState = {
             value={login.first_name}
             onChange={handleChange}
           />
-          <br />
-        <input
+
+        <input className= 'lrinput'
             label="last_name"
             type="text"
             name="last_name"
@@ -89,8 +90,8 @@ const initialState = {
             value={login.last_name}
             onChange={handleChange}
           />
-          <br />
-        <input
+         
+        <input className= 'lrinput'
             label="email"
             type="text"
             name="email"
@@ -98,8 +99,8 @@ const initialState = {
             value={login.email}
             onChange={handleChange}
           />
-          <br />
-          <input
+          
+          <input className= 'lrinput'
             label="username"
             type="text"
             name="username"
@@ -107,8 +108,8 @@ const initialState = {
             value={login.username}
             onChange={handleChange}
           />
-          <br />
-          <input
+          
+          <input className= 'lrinput'
             label="password"
             type="password"
             name="password"
@@ -117,10 +118,10 @@ const initialState = {
             onChange={handleChange}
           />
   
-          <button onClick={userLogin}>Login</button>
-          <button onClick={userRegister}>Register</button>
+          <button onClick={userLogin} className= 'lrinput'>Login</button>
+          <button onClick={userRegister} className= 'lrinput'>Register</button>
         </form>
-      </>
+      </Rstyles>
     );
   };
   

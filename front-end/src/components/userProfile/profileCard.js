@@ -1,6 +1,7 @@
 import React from "react"
 import {axiosWithAuth} from "../../utils/axiosWithAuth"
 import {connect} from "react-redux"
+import Rstyles from "../styles/styles"
 
 function ProfileCard(props) {
     const deleteRecipe = e => {
@@ -14,7 +15,7 @@ function ProfileCard(props) {
     }
 
     return (
-        <div className="profileCardWrap">
+        <Rstyles>
             <div className="topCard">
                 <h2>{props.recipe.title}</h2>   
             </div>
@@ -27,7 +28,7 @@ function ProfileCard(props) {
                 <p>{props.recipe.instructions}</p>
             </div>
             <button onClick={deleteRecipe}>Delete</button>
-        </div>
+        </Rstyles>
     )
 }
 
